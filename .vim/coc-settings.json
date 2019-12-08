@@ -1,0 +1,14 @@
+{
+    "suggest.noselect": false,
+    "coc.preferences.formatOnSaveFiletypes": [],
+    "javascript.validate.enable": false,
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true,
+    "prettier.bracketSpacing": false,
+    "prettier.trailingComma": "es5",
+    "list.previousKeymap": "<C-p>",
+    "list.nextKeymap": "<C-n>",
+    "list.source.files.excludePatterns": ["**/node_modules/*", "**/.git/*"],
+    "list.source.mru.excludePatterns": ["**/node_modules/*", "**/.git/*"],
+    "list.source.grep.excludePatterns": ["**/node_modules/*", "**/.git/*"]
+}
