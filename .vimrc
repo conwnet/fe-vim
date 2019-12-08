@@ -7,7 +7,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'fholgado/minibufexpl.vim'
 
 " colorschemes
@@ -64,6 +65,8 @@ set magic
 set showmatch 
 " How many tenths of a second to blink when matching brackets
 set mat=2
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -103,7 +106,7 @@ command W w !sudo tee % > /dev/null
 
 " color scheme
 syntax on
-let g:airline_theme = 'codedark'
+"let g:airline_theme = 'codedark'
 colorscheme codedark
 highlight Normal ctermbg=None
 highlight Directory ctermbg=None
@@ -144,7 +147,7 @@ set wrap "Wrap lines
 " => Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['^node_modules$', '\.pyc$', '__pycache__']
+let NERDTreeIgnore = ['\.pyc$', '__pycache__', '.git']
 let g:NERDTreeWinSize=35
 nnoremap <silent> <leader>nn :NERDTreeToggle<cr>
 nnoremap <silent> <c-n> :NERDTreeToggle<cr>
@@ -178,10 +181,15 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Grep search workspace characters
-nnoremap <silent> <leader>gs  :<C-u>CocList -I grep<cr>
+nnoremap <silent> <leader>c  :<C-u>CocList<cr>
+nnoremap <silent> <leader>s  :<C-u>CocList -I grep<cr>
 nnoremap <silent> <leader>r  :<C-u>CocList mru<cr>
 nnoremap <silent> <leader>f  :<C-u>CocList files<cr>
+
+nmap <leader>gf :<C-u>CocList gfiles<CR>
+nmap <leader>gs :<C-u>CocList --normal gstatus<CR>
+" show chunk diff at current position
+nmap <leader>gd <Plug>(coc-git-chunkinfo)
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -222,5 +230,29 @@ nmap <silent> <leader>l :MBEbn<cr>
 " => Git gutter (Git diff)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
-let g:gitgutter_highlight_lines = 1
-nnoremap <silent> <leader>gd :GitGutterToggle<cr>
+nnoremap <silent> <leader>gg :GitGutterToggle<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => lightline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ ['mode', 'paste'],
+      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+      \   'right': [ [ 'lineinfo' ], ['percent'] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': ' ', 'right': ' ' },
+      \ 'subseparator': { 'left': ' ', 'right': ' ' }
+      \ }

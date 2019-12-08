@@ -10,5 +10,9 @@
     "list.nextKeymap": "<C-n>",
     "list.source.files.excludePatterns": ["**/node_modules/*", "**/.git/*"],
     "list.source.mru.excludePatterns": ["**/node_modules/*", "**/.git/*"],
-    "list.source.grep.excludePatterns": ["**/node_modules/*", "**/.git/*"]
+    "list.source.grep.excludePatterns": [
+      "**/node_modules/*",
+      "**/.git/*"
+    ],
+    "git.enableGutters": false
 }
