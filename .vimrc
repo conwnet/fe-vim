@@ -7,9 +7,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
-"Plug 'vim-airline/vim-airline'
-Plug 'itchyny/lightline.vim'
-Plug 'fholgado/minibufexpl.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'qpkorr/vim-bufkill'
+Plug 'vim-scripts/BufOnly.vim'
+"Plug 'itchyny/lightline.vim'
+"Plug 'fholgado/minibufexpl.vim'
 
 " colorschemes
 Plug 'tomasiser/vim-code-dark'
@@ -106,7 +108,7 @@ command W w !sudo tee % > /dev/null
 
 " color scheme
 syntax on
-"let g:airline_theme = 'codedark'
+let g:airline_theme = 'codedark'
 colorscheme codedark
 highlight Normal ctermbg=None
 highlight Directory ctermbg=None
@@ -223,8 +225,6 @@ nmap <silent> <Leader>b <Plug>(easymotion-b)
 """"""""""""""""""""""""""""""
 nmap <silent> <C-b> :MBEFocus<cr>
 nmap <silent> <leader>d :MBEbd<cr>
-nmap <silent> <leader>h :MBEbp<cr>
-nmap <silent> <leader>l :MBEbn<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
@@ -256,3 +256,17 @@ let g:lightline = {
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': ' ' }
       \ }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'jsformatter'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => bufkill
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> <leader>h :bp<cr>
+nmap <silent> <leader>l :bn<cr>
+nmap <silent> <leader>d :BD<cr>
+nmap <silent> <leader>o :BufOnly<cr>

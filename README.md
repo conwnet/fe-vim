@@ -3,7 +3,7 @@
 vim config for web developer
 
 
-## usage
+## Install
 
 ### clone and copy files
 
@@ -27,5 +27,6 @@ cp vimrc/.vim/coc-settings.json ~/.vim/coc-settings.json
 - install plugins
     - :PlugInstall
     - :CocInstall coc-lists
+    - :CocInstall coc-git
 
 All done!
