@@ -10,6 +10,9 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'qpkorr/vim-bufkill'
 Plug 'vim-scripts/BufOnly.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-commentary'
+"Plug 'scrooloose/nerdcommenter'
 "Plug 'itchyny/lightline.vim'
 "Plug 'fholgado/minibufexpl.vim'
 
@@ -152,7 +155,7 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$', '__pycache__', '.git']
 let g:NERDTreeWinSize=35
 nnoremap <silent> <leader>nn :NERDTreeToggle<cr>
-nnoremap <silent> <c-n> :NERDTreeToggle<cr>
+"nnoremap <silent> <c-n> :NERDTreeToggle<cr>
 nnoremap <silent> <leader>nf :NERDTreeFind<cr>
 nnoremap <silent> <c-m> :NERDTreeFind<cr>
 " open NERDTree automatically
@@ -184,12 +187,12 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 nnoremap <silent> <leader>c  :<C-u>CocList<cr>
-nnoremap <silent> <leader>s  :<C-u>CocList -I grep<cr>
+nnoremap <silent> <leader>s  :<C-u>CocList grep<cr>
 nnoremap <silent> <leader>r  :<C-u>CocList mru<cr>
 nnoremap <silent> <leader>f  :<C-u>CocList files<cr>
 
 nmap <leader>gf :<C-u>CocList gfiles<CR>
-nmap <leader>gs :<C-u>CocList --normal gstatus<CR>
+nmap <leader>gs :<C-u>CocList gstatus<CR>
 " show chunk diff at current position
 nmap <leader>gd <Plug>(coc-git-chunkinfo)
 
@@ -213,6 +216,13 @@ function! s:show_documentation()
   endif
 endfunction
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
+
+
+" Remap for format selected region
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+command! -nargs=0 Format :call CocAction('format')
+
 
 """"""""""""""""""""""""""""""
 " => easymotion
