@@ -22,7 +22,8 @@ Plug 'tomasiser/vim-code-dark'
 " JavaScript plugins
 Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax'
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
+Plug 'maxmellon/vim-jsx-pretty'
 
 call plug#end()
 
@@ -239,7 +240,8 @@ nmap <silent> <leader>d :MBEbd<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled=0
+let g:gitgutter_enabled = 0
+let g:gitgutter_map_keys = 0
 nnoremap <silent> <leader>gg :GitGutterToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -274,8 +276,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => bufkill
+" => buffers and buffer-kill
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:BufKillCreateMappings = 0
 nmap <silent> <leader>h :bp<cr>
 nmap <silent> <leader>l :bn<cr>
 nmap <silent> <leader>d :BD<cr>
