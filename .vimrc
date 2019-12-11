@@ -139,6 +139,7 @@ set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+set relativenumber
 
 " Linebreak on 500 characters
 set lbr
@@ -148,6 +149,18 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+" Delete trailing white space on save, useful for some filetypes ;)
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+if has("autocmd")
+    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
@@ -228,8 +241,8 @@ command! -nargs=0 Format :call CocAction('format')
 """"""""""""""""""""""""""""""
 " => easymotion
 """"""""""""""""""""""""""""""
-nmap <silent> <Leader>w <Plug>(easymotion-w)
-nmap <silent> <Leader>b <Plug>(easymotion-b)
+nmap <silent> <Leader>j <Plug>(easymotion-w)
+nmap <silent> <Leader>k <Plug>(easymotion-b)
 
 """"""""""""""""""""""""""""""
 " => MEB
