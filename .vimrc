@@ -12,6 +12,7 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
+"Plug 'ryanoasis/vim-devicons'
 "Plug 'scrooloose/nerdcommenter'
 "Plug 'itchyny/lightline.vim'
 "Plug 'fholgado/minibufexpl.vim'
@@ -126,6 +127,16 @@ highlight EndOfBuffer ctermbg=None
 set cursorline
 highlight CursorLine guibg=#303000 ctermbg=236
 
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Properly disable sound on errors on MacVim
+if has("gui_macvim")
+    autocmd GUIEnter * set vb t_vb=
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -165,8 +176,9 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['\.pyc$', '__pycache__', '.git']
+let NERDTreeIgnore = ['\.pyc$', '__pycache__', '.git', '.DS_Store']
 let g:NERDTreeWinSize=35
 nnoremap <silent> <leader>nn :NERDTreeToggle<cr>
 "nnoremap <silent> <c-n> :NERDTreeToggle<cr>
@@ -178,6 +190,14 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => devicons
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:webdevicons_enable_nerdtree = 1
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+"let g:DevIconsEnableFoldersOpenClose = 1
+"let g:DevIconsDefaultFolderOpenSymbol=''
+"let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol=''
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => coc.nvim
@@ -285,6 +305,7 @@ let g:lightline = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => airline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 
@@ -296,3 +317,18 @@ nmap <silent> <leader>h :bp<cr>
 nmap <silent> <leader>l :bn<cr>
 nmap <silent> <leader>d :BD<cr>
 nmap <silent> <leader>o :BufOnly<cr>
+
+function! s:key_leader_bufnum(num)
+    let l:buffers = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+    return ':b ' . l:buffers[a:num - 1] . "\<CR>"
+endfunction
+
+nnoremap <expr> <Leader>1 <SID>key_leader_bufnum(1)
+nnoremap <expr> <Leader>2 <SID>key_leader_bufnum(2)
+nnoremap <expr> <Leader>3 <SID>key_leader_bufnum(3)
+nnoremap <expr> <Leader>4 <SID>key_leader_bufnum(4)
+nnoremap <expr> <Leader>5 <SID>key_leader_bufnum(5)
+nnoremap <expr> <Leader>6 <SID>key_leader_bufnum(6)
+nnoremap <expr> <Leader>7 <SID>key_leader_bufnum(7)
+nnoremap <expr> <Leader>8 <SID>key_leader_bufnum(8)
+nnoremap <expr> <Leader>9 <SID>key_leader_bufnum(9)
