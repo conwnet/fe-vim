@@ -35,7 +35,7 @@ call plug#end()
 let mapleader = ','
 
 " Show line number
-set number
+set nonumber
 " Scroll off
 set scrolloff=7
 " Set to auto read when a file is changed from the outside
@@ -204,6 +204,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set updatetime=300
 
+autocmd CursorHold * silent call CocActionAsync('highlight')
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -229,6 +230,7 @@ nmap <leader>gf :<C-u>CocList gfiles<CR>
 nmap <leader>gs :<C-u>CocList gstatus<CR>
 " show chunk diff at current position
 nmap <leader>gd <Plug>(coc-git-chunkinfo)
+vmap <leader>f <Plug>(coc-format-selected)
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -250,7 +252,6 @@ function! s:show_documentation()
   endif
 endfunction
 nnoremap <silent> gh :call <SID>show_documentation()<CR>
-
 
 " Remap for format selected region
 " xmap <leader>f  <Plug>(coc-format-selected)
@@ -332,3 +333,7 @@ nnoremap <expr> <Leader>6 <SID>key_leader_bufnum(6)
 nnoremap <expr> <Leader>7 <SID>key_leader_bufnum(7)
 nnoremap <expr> <Leader>8 <SID>key_leader_bufnum(8)
 nnoremap <expr> <Leader>9 <SID>key_leader_bufnum(9)
+
+"""""""""""""" indentLine
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_leadingSpaceEnabled=1
