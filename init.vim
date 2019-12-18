@@ -124,8 +124,8 @@ highlight VertSplit ctermbg=None
 highlight Visual cterm=reverse
 highlight SignColumn ctermbg=None
 highlight EndOfBuffer ctermbg=None
-set cursorline
 highlight CursorLine guibg=#303000 ctermbg=236
+set cursorline
 
 " No annoying sound on errors
 set noerrorbells
@@ -221,16 +221,16 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-nnoremap <silent> <leader>c  :<C-u>CocList<cr>
+nnoremap <silent> <leader>p  :<C-u>CocList<cr>
 nnoremap <silent> <leader>s  :<C-u>CocList grep<cr>
 nnoremap <silent> <leader>r  :<C-u>CocList mru<cr>
-nnoremap <silent> <leader>f  :<C-u>CocList files<cr>
+nnoremap <silent> <C-p>  :<C-u>CocList files<cr>
 
 nmap <leader>gf :<C-u>CocList gfiles<CR>
 nmap <leader>gs :<C-u>CocList gstatus<CR>
 " show chunk diff at current position
 nmap <leader>gd <Plug>(coc-git-chunkinfo)
-vmap <leader>f <Plug>(coc-format-selected)
+nnoremap <silent> <leader>f <Plug>(coc-format-selected)
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -332,8 +332,18 @@ nnoremap <expr> <Leader>5 <SID>key_leader_bufnum(5)
 nnoremap <expr> <Leader>6 <SID>key_leader_bufnum(6)
 nnoremap <expr> <Leader>7 <SID>key_leader_bufnum(7)
 nnoremap <expr> <Leader>8 <SID>key_leader_bufnum(8)
-nnoremap <expr> <Leader>9 <SID>key_leader_bufnum(9)
+" nnoremap <expr> <Leader>9 <SID>key_leader_bufnum(9)
 
-"""""""""""""" indentLine
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:indentLine_leadingSpaceEnabled=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => commentary
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+xmap <leader>c  <Plug>Commentary
+nmap <leader>c  <Plug>Commentary
+omap <leader>c  <Plug>Commentary
+nmap <leader>cc <Plug>CommentaryLine
+nmap <leader>cu <Plug>Commentary<Plug>Commentary
