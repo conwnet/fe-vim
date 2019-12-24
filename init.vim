@@ -231,6 +231,7 @@ nmap <leader>gs :<C-u>CocList gstatus<CR>
 " show chunk diff at current position
 nmap <leader>gd <Plug>(coc-git-chunkinfo)
 nnoremap <silent> <leader>f <Plug>(coc-format-selected)
+vmap <silent> <leader>f <Plug>(coc-format-selected)
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -335,9 +336,10 @@ nnoremap <expr> <Leader>8 <SID>key_leader_bufnum(8)
 " nnoremap <expr> <Leader>9 <SID>key_leader_bufnum(9)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => indentLine
+" => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:indentLine_leadingSpaceEnabled=1
+let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => commentary
@@ -347,3 +349,4 @@ nmap <leader>c  <Plug>Commentary
 omap <leader>c  <Plug>Commentary
 nmap <leader>cc <Plug>CommentaryLine
 nmap <leader>cu <Plug>Commentary<Plug>Commentary
+
