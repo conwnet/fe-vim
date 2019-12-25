@@ -110,6 +110,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 command W w !sudo tee % > /dev/null
+nmap <leader>w :wa<CR>
 
 " color scheme
 syntax on
