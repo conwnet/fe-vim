@@ -8,6 +8,12 @@
     "prettier.trailingComma": "es5",
     "list.previousKeymap": "<C-p>",
     "list.nextKeymap": "<C-n>",
+    "list.insertMappings": {
+        "<C-k>": "prompt:previous",
+        "<C-j>": "prompt:next",
+        "<Up>": "prompt:previous",
+        "<Down>": "prompt:next"
+    },
     "list.source.files.excludePatterns": ["**/node_modules/*", "**/.git/*"],
     "list.source.mru.excludePatterns": ["**/node_modules/*", "**/.git/*"],
     "list.source.grep.excludePatterns": [
