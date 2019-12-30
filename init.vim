@@ -9,7 +9,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'qpkorr/vim-bufkill'
-Plug 'vim-scripts/BufOnly.vim'
+"Plug 'vim-scripts/BufOnly.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
 "Plug 'ryanoasis/vim-devicons'
@@ -59,7 +59,7 @@ endif
 " A buffer becomes hidden when it is abandoned
 set hidden
 " Ignore case when searching
-set ignorecase
+"set ignorecase
 " Highlight search results
 set hlsearch
 " Makes search act like search in modern browsers
@@ -223,7 +223,7 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 nnoremap <silent> <leader>p  :<C-u>CocList<cr>
-nnoremap <silent> <leader>s  :<C-u>CocList grep<cr>
+nmap <silent> <leader>s  :<C-u>CocList --auto-preview --interactive grep<cr>
 nnoremap <silent> <leader>r  :<C-u>CocList mru<cr>
 nnoremap <silent> <C-p>  :<C-u>CocList files<cr>
 
@@ -266,12 +266,6 @@ command! -nargs=0 Format :call CocAction('format')
 """"""""""""""""""""""""""""""
 nmap <silent> <Leader>j <Plug>(easymotion-w)
 nmap <silent> <Leader>k <Plug>(easymotion-b)
-
-""""""""""""""""""""""""""""""
-" => MEB
-""""""""""""""""""""""""""""""
-nmap <silent> <C-b> :MBEFocus<cr>
-nmap <silent> <leader>d :MBEbd<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
@@ -318,11 +312,24 @@ let g:airline#extensions#tabline#formatter = 'jsformatter'
 let g:BufKillCreateMappings = 0
 nmap <silent> <leader>h :bp<cr>
 nmap <silent> <leader>l :bn<cr>
-nmap <silent> <leader>d :BD<cr>
-nmap <silent> <leader>o :BufOnly<cr>
+nmap <silent> <leader>q :BD<cr>
+
+function! s:clean_buffers()
+    let l:unused_buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && len(win_findbuf(v:val)) < 1')
+    if (len(l:unused_buffers) < 1)
+        return ":echo 'no buffer needs clean'\<CR>"
+    endif
+    return ':bdel ' . join(unused_buffers, ' ') . "\<CR>"
+endfunction
+
+" close unopened buffers
+nnoremap <expr> <leader>o <SID>clean_buffers()
 
 function! s:key_leader_bufnum(num)
     let l:buffers = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+    if (a:num > len(l:buffers))
+        return ":echo 'no such buffer'\<CR>"
+    endif
     return ':b ' . l:buffers[a:num - 1] . "\<CR>"
 endfunction
 
@@ -334,7 +341,7 @@ nnoremap <expr> <Leader>5 <SID>key_leader_bufnum(5)
 nnoremap <expr> <Leader>6 <SID>key_leader_bufnum(6)
 nnoremap <expr> <Leader>7 <SID>key_leader_bufnum(7)
 nnoremap <expr> <Leader>8 <SID>key_leader_bufnum(8)
-" nnoremap <expr> <Leader>9 <SID>key_leader_bufnum(9)
+nnoremap <expr> <Leader>9 <SID>key_leader_bufnum(9)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
