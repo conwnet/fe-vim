@@ -9,9 +9,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'qpkorr/vim-bufkill'
-"Plug 'vim-scripts/BufOnly.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
+"Plug 'vim-scripts/BufOnly.vim'
 "Plug 'ryanoasis/vim-devicons'
 "Plug 'scrooloose/nerdcommenter'
 "Plug 'itchyny/lightline.vim'
@@ -31,8 +31,8 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => basic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set leader key to ','
-let mapleader = ','
+" Set leader key to <space>
+let mapleader = ' '
 
 " Show line number
 set nonumber
